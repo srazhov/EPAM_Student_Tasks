@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EPAM.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:EPAM.Tests.ETasksTests">
+            <summary>
+            Tests of ETasks' methods
+            </summary>
+        </member>
+        <member name="M:EPAM.Tests.ETasksTests.FindNextBiggerNumber_thatContainsOnlyGivenDigits(System.Int32)">
+            <summary>
+            Test of FindNextBiggerNumber
+            </summary>
+            <param name="value">given value</param>
+            <returns>Next big number that contains digits of the given value</returns>
+        </member>
+    </members>
+</doc>

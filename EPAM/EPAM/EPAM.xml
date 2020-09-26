@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EPAM</name>
+    </assembly>
+    <members>
+        <member name="T:EPAM.ETasks">
+            <summary>
+            The Class that holds realizations of given Tasks from EPAM
+            </summary>
+        </member>
+        <member name="M:EPAM.ETasks.Main">
+            <summary>
+            Point of Entry
+            </summary>
+        </member>
+        <member name="M:EPAM.ETasks.GetMaxElement(System.Int32[])">
+            <summary>Recursively finds a required element in the given Array</summary>
+            <param name="arr">Given Array</param>
+            <returns>Max element of the given Array</returns>
+        </member>
+        <member name="M:EPAM.ETasks.MergeStrings(System.String,System.String)">
+            <summary>
+            Merge two strings that contains only Latin alphabet symbols
+            </summary>
+            <param name="first">First String</param>
+            <param name="second">Second String</param>
+            <exception cref="T:System.ArgumentException">No repeats</exception>
+            <returns>Unified Latin only string</returns>
+        </member>
+        <member name="M:EPAM.ETasks.FindMagicalIndex(System.Single[],System.Int32@)">
+            <summary>Finds an element that has equal total sum of elements in both sides.</summary>
+            <param name="arr">Array to look for</param>
+            <param name="foundIndex">Outputs index of the found number</param>
+            <exception cref="T:System.ArgumentException">Length of the given Array must be more or equal than 3</exception>
+            <returns>Index that has equal total sum of elements in both sides. Returns -1 if it doesn't contain one</returns>
+        </member>
+        <member name="M:EPAM.ETasks.FilterDigit(System.Int32[],System.Int32)">
+            <summary>Filters the array and outputs an array contained with given digit</summary>
+            <param name="arr">Array to look for</param>
+            <param name="digit">Required number</param>
+            <exception cref="T:System.NullReferenceException">Array Must not be null</exception>
+            <returns>An array with elements that contain given digit</returns>
+        </member>
+        <member name="M:EPAM.ETasks.FindNextBiggerNumber(System.Int32)">
+            <summary>Finds the next bigger number that contains given number's digits</summary>
+            <param name="numb">Given Number</param>
+            <exception cref="T:System.ArgumentException">Number must be positive</exception>
+            <returns>The next bigger number,
+            that contains only the same digits of the given number</returns>
+        </member>
+    </members>
+</doc>

@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\srazh\Documents\GitHub\EPAM_tasks\EPAM\EPAM\EPAM.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>
