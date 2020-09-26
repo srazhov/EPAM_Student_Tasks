@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ETasks.cs" company="EPAM">
+// <copyright file="BasicCoding.cs" company="EPAM">
 // Copyright (c) Company. All rights reserved.
 // </copyright>
 // <author>Srazhov Miras</author>
@@ -13,28 +13,28 @@ namespace EPAM
 
     /// <summary>
     /// The Class that holds realizations of given Tasks from EPAM
+    /// Theme: Basic Coding
     /// </summary>
-    public class ETasks
+    public class BasicCoding
     {
-        /// <summary>
-        /// Point of Entry
-        /// </summary>
-        public static void Main() 
-        {
-        }
-        ////UNFINISHED
-
         /// <summary>Recursively finds a required element in the given Array</summary>
         /// <param name="arr">Given Array</param>
+        /// <param name="next">First index to look for. Should be 0</param>
         /// <returns>Max element of the given Array</returns>
-        public static int GetMaxElement(int[] arr) 
+        public static int GetMaxElement(int[] arr, int next) 
         {
             if (arr == null)
             {
                 throw new NullReferenceException();
             }
 
-            return 0;
+            if (next < arr.Length)
+            {
+                int nextElement = GetMaxElement(arr, next + 1);
+                return arr[next] > nextElement ? arr[next] : nextElement;
+            }
+
+            return arr[0];
         }
 
         /// <summary>Finds an element that has equal total sum of elements in both sides.</summary>
@@ -94,38 +94,37 @@ namespace EPAM
             }
 
             int result = -1;
-            int temp = numb;
+            int[] digits = SplitInts(numb);
 
-            List<int> digits = new List<int>();
-            while (temp > 0)
+            for (int i = digits.Length - 1; i >= 0; i--)
             {
-                digits.Add(temp % 10);
-                temp /= 10;
-            }
-
-            digits.Reverse();
-            int[] tempArr = digits.ToArray();
-
-            for (int i = digits.Count - 1; i >= 0; i--)
-            {
-                for (int x = digits.Count - 1; x > i; x--)
+                for (int x = digits.Length - 1; x >= i; x--)
                 {
-                    int temporary = digits[i];
-                    digits[i] = digits[x];
-                    digits[x] = temporary;
-
-                    int tempResult = ConcatenateInts(digits.ToArray());
-                    int temptempResult = SwapAndConcatenateValues(tempArr.ToArray(), i, x);
-                    if (tempResult > temptempResult && temptempResult > numb)
-                    {
-                        tempResult = temptempResult;
-                    }
+                    int tempResult = SwapAndConcatenateValues(digits.ToArray(), i, x);
 
                     if (tempResult > numb && (tempResult < result || result == -1))
                     {
                         result = tempResult;
                     }
                 }
+
+                if (result != -1)
+                {
+                    int tempResult;
+                    if (i != 0)
+                    {
+                        tempResult = FindNextBiggerNumber(ConcatenateInts(digits.Skip(i).ToArray()));
+                        tempResult = ConcatenateInts(digits.SkipLast(digits.Length - i).Concat(new int[] { tempResult }).ToArray());
+                    }
+                    else
+                    {
+                        int[] reqArray = SplitInts(result);
+                        tempResult = ConcatenateInts(reqArray.Skip(1).Reverse().ToArray());
+                        tempResult = ConcatenateInts(reqArray.SkipLast(reqArray.Length - 1).Concat(new int[] { tempResult }).ToArray());
+                    }
+
+                    return tempResult < result && tempResult > numb ? tempResult : result;
+                } 
             }
 
             return result;
@@ -148,6 +147,19 @@ namespace EPAM
                 arr[second] = temporary;
 
                 return ConcatenateInts(arr);
+            }
+
+            int[] SplitInts(int givenNumb)
+            {
+                List<int> tempDigits = new List<int>();
+                while (givenNumb > 0)
+                {
+                    tempDigits.Add(givenNumb % 10);
+                    givenNumb /= 10;
+                }
+
+                tempDigits.Reverse();
+                return tempDigits.ToArray();
             }
         }
 
