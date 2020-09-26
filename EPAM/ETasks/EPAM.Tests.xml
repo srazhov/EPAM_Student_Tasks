@@ -9,9 +9,37 @@
             Tests of ETasks' methods
             </summary>
         </member>
+        <member name="M:EPAM.Tests.ETasksTests.CheckMaxElementFinding(System.Int32[])">
+            <summary>
+            Test of 'GetMaxElement'
+            </summary>
+            <param name="sourceArray">Source Array</param>
+            <returns>Max element of the given Array</returns>
+        </member>
+        <member name="M:EPAM.Tests.ETasksTests.CheckFindingElementIndexBetweenEqualSums(System.Double[])">
+            <summary>Test of 'FindMagicalIndex'</summary>
+            <param name="sourceArray">Source Array</param>
+            <returns>Index that has equal total sum of elements in both sides. Returns -1 if it doesn't contain one</returns>
+        </member>
+        <member name="M:EPAM.Tests.ETasksTests.CheckStringConcatenation(System.String,System.String)">
+            <summary>
+            Test of 'MergeStrings'
+            </summary>
+            <param name="firstStr">First string</param>
+            <param name="secondStr">Second string</param>
+            <returns>Returns the merged String that has only the Latin characters </returns>
+        </member>
+        <member name="M:EPAM.Tests.ETasksTests.CheckDigitFiltering(System.Int32[],System.Int32)">
+            <summary>
+            Test of 'FilterDigit'
+            </summary>
+            <param name="sourceArray">Source Array</param>
+            <param name="digit">Required digit</param>
+            <returns>An array with elements that contain given digit</returns>
+        </member>
         <member name="M:EPAM.Tests.ETasksTests.FindNextBiggerNumber_thatContainsOnlyGivenDigits(System.Int32)">
             <summary>
-            Test of FindNextBiggerNumber
+            Test of 'FindNextBiggerNumber'
             </summary>
             <param name="value">given value</param>
             <returns>Next big number that contains digits of the given value</returns>

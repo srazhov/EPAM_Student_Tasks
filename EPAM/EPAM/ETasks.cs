@@ -21,9 +21,6 @@ namespace EPAM
         /// </summary>
         public static void Main() 
         {
-//            Console.WriteLine(FindNextBiggerNumber(1233));
-            Console.WriteLine(FindNextBiggerNumber(3456432));
-            //3462345
         }
         ////UNFINISHED
 
@@ -40,91 +37,48 @@ namespace EPAM
             return 0;
         }
 
+        /// <summary>Finds an element that has equal total sum of elements in both sides.</summary>
+        /// <param name="arr">Array to look for</param>
+        /// <exception cref="ArgumentException">Length of the given Array must be more or equal than 3</exception>
+        /// <returns>Index that has equal total sum of elements in both sides. Returns -1 if it doesn't contain one</returns>
+        public static int FindMagicalIndex(double[] arr)
+        {
+            if (arr == null)
+            {
+                throw new ArgumentException();
+            }
+
+            if (arr.Length < 3)
+            {
+                return -1;
+            }
+
+            for (int i = 1, k = arr.Length - 2; i < arr.Length; i++, k--)
+            {
+                if (Math.Round(arr.Skip(i).Sum()) == Math.Round(arr.SkipLast(k).Sum()))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
         /// <summary>
         /// Merge two strings that contains only Latin alphabet symbols
         /// </summary>
         /// <param name="first">First String</param>
         /// <param name="second">Second String</param>
-        /// <exception cref="ArgumentException">No repeats</exception>
+        /// <exception cref="ArgumentException">Only Latin Alphabet character</exception>
         /// <returns>Unified Latin only string</returns>
         public static string MergeStrings(string first, string second)
         {
-            char[] toCheck1 = first.ToCharArray();
-            char[] toCheck2 = second.ToCharArray();
-
-            foreach (var check1 in toCheck1)
-            {
-                foreach (var check2 in toCheck2)
-                {
-                    if (check1 == check2 || !isPossible(check1) || !isPossible(check2))
-                    {
-                        throw new ArgumentException();
-                    }
-                }
-            }
-
-            return first + second;
-
-            bool isPossible(char character)
-            {
-                return character >= 'A' && character <= 'Z';
-            }
-        }
-
-        /// <summary>Finds an element that has equal total sum of elements in both sides.</summary>
-        /// <param name="arr">Array to look for</param>
-        /// <param name="foundIndex">Outputs index of the found number</param>
-        /// <exception cref="ArgumentException">Length of the given Array must be more or equal than 3</exception>
-        /// <returns>Index that has equal total sum of elements in both sides. Returns -1 if it doesn't contain one</returns>
-        public static float FindMagicalIndex(float[] arr, out int foundIndex)
-        {
-            if (arr == null || arr.Length < 3)
+            if (!first.All(c => c >= 'A' && c <= 'z') || !second.All(c => c >= 'A' && c <= 'z'))
             {
                 throw new ArgumentException();
             }
 
-            List<float> first = new List<float>();
-            List<float> last = new List<float>(arr);
-            last.RemoveAt(0);
-
-            for (int i = 1; i < arr.Length; i++)
-            {
-                first.Add(arr[i - 1]);
-                last.RemoveAt(0);
-                if (first.Sum() == last.Sum())
-                {
-                    foundIndex = i;
-                    return arr[i];
-                }
-            }
-
-            foundIndex = -1;
-            return -1;
-        }
-
-        /// <summary>Filters the array and outputs an array contained with given digit</summary>
-        /// <param name="arr">Array to look for</param>
-        /// <param name="digit">Required number</param>
-        /// <exception cref="NullReferenceException">Array Must not be null</exception>
-        /// <returns>An array with elements that contain given digit</returns>
-        public static int[] FilterDigit(int[] arr, int digit)
-        {
-            if (arr == null)
-            {
-                throw new NullReferenceException();
-            }
-
-            List<int> result = new List<int>();
-
-            foreach (var ar in arr)
-            {
-                if (ar.ToString().Contains(digit.ToString()))
-                {
-                    result.Add(ar);
-                }
-            }
-
-            return result.ToArray();
+            return first + string.Concat(second.Where(c => !first.Contains(c)));
         }
 
         /// <summary>Finds the next bigger number that contains given number's digits</summary>
@@ -163,7 +117,9 @@ namespace EPAM
                     int tempResult = ConcatenateInts(digits.ToArray());
                     int temptempResult = SwapAndConcatenateValues(tempArr.ToArray(), i, x);
                     if (tempResult > temptempResult && temptempResult > numb)
+                    {
                         tempResult = temptempResult;
+                    }
 
                     if (tempResult > numb && (tempResult < result || result == -1))
                     {
@@ -185,20 +141,39 @@ namespace EPAM
                 return int.Parse(res);
             }
 
-            static int SwapAndConcatenateValues(int[] arr, int first, int second) 
+            int SwapAndConcatenateValues(int[] arr, int first, int second) 
             {
                 int temporary = arr[first];
                 arr[first] = arr[second];
                 arr[second] = temporary;
 
-                string res = string.Empty;
-                foreach (var a in arr)
-                {
-                    res += a;
-                }
-
-                return int.Parse(res);
+                return ConcatenateInts(arr);
             }
+        }
+
+        /// <summary>Filters the array and outputs an array contained with given digit</summary>
+        /// <param name="arr">Array to look for</param>
+        /// <param name="digit">Required number</param>
+        /// <exception cref="NullReferenceException">Array Must not be null</exception>
+        /// <returns>An array with elements that contain given digit</returns>
+        public static int[] FilterDigit(int[] arr, int digit)
+        {
+            if (arr == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            List<int> result = new List<int>();
+
+            foreach (var ar in arr)
+            {
+                if (ar.ToString().Contains(digit.ToString()))
+                {
+                    result.Add(ar);
+                }
+            }
+
+            return result.ToArray();
         }
     }
 }
